@@ -31,7 +31,7 @@ class Solution {
             temp-=i;
             row++;
             if(temp<0){
-                return row-1;
+                break;
             }
         }
         return row-1;
