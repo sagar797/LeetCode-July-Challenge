@@ -38,3 +38,58 @@ class Solution {
 		return al.get(al.size()-1);
     }
 }
+
+
+//Ohter Solutions:
+
+class Solution {
+    public int nthUglyNumber(int n) {//1
+        int[] ugly = new int[n];
+        int i2=0, i3=0, i5=0;
+        ugly[0] = 1;
+        int min = 0;
+        for(int i=1; i<n; i++){
+            min = Math.min(2*ugly[i2], Math.min(3*ugly[i3], 5*ugly[i5]));
+            ugly[i] = min;
+            if(min==2*ugly[i2]){
+                i2++;
+            }
+            if(min==3*ugly[i3]){    //not else-if since we can have duplicates
+                i3++;
+            }
+            if(min==5*ugly[i5]){     //not else-if since we can have duplicates
+                i5++;
+            }
+        }
+        return ugly[n-1];
+    }
+
+    public int nthUglyNumber2(int n) {//2      
+        TreeSet<Long> treeset = new TreeSet();
+        treeset.add(1L);
+        int c = 1;
+        while(c<n){
+            long x = treeset.pollFirst();
+            c++;
+            treeset.add(x*2);
+            treeset.add(x*3);
+            treeset.add(x*5);
+        }
+        return (int)((long)treeset.pollFirst());
+    }
+    public int nthUglyNumber3(int n) {//3
+        if(n==1) return 1;
+        PriorityQueue<Long> q = new PriorityQueue();
+        q.add(1l);
+
+        for(long i=1; i<n; i++) {
+            long tmp = q.poll();
+            while(!q.isEmpty() && q.peek()==tmp) tmp = q.poll();
+
+            q.add(tmp*2);
+            q.add(tmp*3);
+            q.add(tmp*5);
+        }
+        return q.poll().intValue();
+    }
+}
