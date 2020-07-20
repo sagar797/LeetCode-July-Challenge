@@ -17,4 +17,5 @@ Day 15. Reverse Words in a String
 Day 16. Pow(x, n)  
 Day 17. Top K Frequent Elements  
 Day 18. Course Schedule II  
-Day 19. Add Binary
+Day 19. Add Binary  
+Day 20. Remove Linked List Elements
